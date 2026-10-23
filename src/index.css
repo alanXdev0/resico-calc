@@ -1,0 +1,113 @@
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/jetbrains-mono';
+@import 'tailwindcss';
+
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/* Tokens: oscuro por defecto, claro con data-theme="light". */
+:root,
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #0b0d10;
+  --surface: #111418;
+  --surface-2: #171b21;
+  --line: #222830;
+  --line-strong: #313944;
+  --fg: #e7eaf0;
+  --muted: #8b94a3;
+  --faint: #5d6674;
+  --accent: #3ee8a3;
+  --accent-fg: #04140d;
+  --accent-soft: rgb(62 232 163 / 0.1);
+  --plus: #6cc5ff;
+  --minus: #ff8a7a;
+  --warn: #f5b84a;
+  --danger: #ff6b6b;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  --bg: #f6f6f3;
+  --surface: #ffffff;
+  --surface-2: #f0f0ec;
+  --line: #e3e3dd;
+  --line-strong: #cdcdc5;
+  --fg: #101318;
+  --muted: #5a6371;
+  --faint: #8a929e;
+  --accent: #0a8f5c;
+  --accent-fg: #ffffff;
+  --accent-soft: rgb(10 143 92 / 0.09);
+  --plus: #0b6fb8;
+  --minus: #c2410c;
+  --warn: #9a5b00;
+  --danger: #d12f2f;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-soft: var(--accent-soft);
+  --color-plus: var(--plus);
+  --color-minus: var(--minus);
+  --color-warn: var(--warn);
+  --color-danger: var(--danger);
+}
+
+@theme {
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, 'Cascadia Code', Consolas, monospace;
+}
+
+@layer base {
+  html {
+    background: var(--bg);
+  }
+  /* Con un modal abierto, la página de fondo no hace scroll. */
+  html:has(dialog[open]) {
+    overflow: hidden;
+  }
+  body {
+    @apply bg-bg font-sans text-fg antialiased;
+    font-feature-settings: 'cv11', 'ss01';
+  }
+  ::selection {
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  input:focus-visible {
+    outline: none;
+  }
+}
+
+.toast-in {
+  animation: toast-in 160ms ease-out;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

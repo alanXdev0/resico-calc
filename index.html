@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="es-MX" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>RESICO Calc — Facturación y retenciones PPFF</title>
+    <meta
+      name="description"
+      content="Calcula subtotal, IVA, retenciones de ISR e IVA y total a recibir para facturas de RESICO Personas Físicas. Bruto → Neto y Neto → Bruto, con centavos exactos."
+    />
+    <meta name="theme-color" content="#0b0d10" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png" />
+    <script>
+      // Aplica el tema guardado antes del primer pintado (evita el destello claro).
+      try {
+        var saved = JSON.parse(localStorage.getItem('resico-calc:v1') || '{}');
+        if (saved.theme === 'light') document.documentElement.dataset.theme = 'light';
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
